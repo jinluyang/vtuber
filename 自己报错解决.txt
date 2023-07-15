@@ -1,0 +1,2 @@
+pip安装不全，
+配置config要保存为 没有ROOM的 UTF8格式

@@ -1,0 +1,24 @@
+点击空格运行
+
+在打开的终端分别输入
+python -m pip install --upgrade pip
+
+enter之后输入：
+
+pip install gtts
+
+再运行”安装环境“
+
+
+
+解决方案同上
+
+pip3 install pygame -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/
+
+3.运行脚本闪退：
+
+打开终端同第一步，接着输入python sample.py
+
+pip3 uninstall pygame           (卸载）
+pip uninstall pygame          （卸载）
+python -m pip install pygame

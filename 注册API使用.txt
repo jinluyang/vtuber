@@ -1,0 +1,4 @@
+
+GPT的API：https://platform.openai.com/account/api-keys
+
+报错修复：pip install urllib3==1.25.11

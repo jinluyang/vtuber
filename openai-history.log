@@ -1,0 +1,689 @@
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u597d"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+ERROR:blivedm:room=2028901 _handle_command() failed, command={'cmd': 'DANMU_MSG', 'info': [[0, 1, 25, 16777215, 1679561501422, 1679561501396, 0, '3c2903e2', 0, 0, 0, '', 0, '{}', '{}', {'mode': 0, 'show_player_type': 0, 'extra': '{"send_from_me":false,"mode":0,"color":16777215,"dm_type":0,"font_size":25,"player_mode":1,"show_player_type":0,"content":"你好","user_hash":"1009320930","emoticon_unique":"","bulge_display":0,"recommend_score":3,"main_state_dm_color":"","objective_state_dm_color":"","direction":0,"pk_direction":0,"quartet_direction":0,"anniversary_crowd":0,"yeah_space_type":"","yeah_space_url":"","jump_to_url":"","space_type":"","space_url":"","animation":{},"emots":null,"is_audited":false,"id_str":"75204b06f04cacfe9b2d39986846102f73"}'}, {'activity_identity': '', 'activity_source': 0, 'not_show': 0}], '你好', [34580757, '辉夜海林顿', 0, 0, 0, 10000, 1, ''], [10, '肉饼圈', '辉夜海灵顿', 22731555, 9272486, '', 0, 12632256, 12632256, 12632256, 0, 0, 71555536], [8, 0, 9868950, '>50000', 0], ['', ''], 0, 0, None, {'ts': 1679561501, 'ct': '7CC5BDDC'}, 0, 0, None, None, 0, 210], 'dm_v2': ''}
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 667, in urlopen
+    self._prepare_proxy(conn)
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 932, in _prepare_proxy
+    conn.connect()
+  File "G:\Python310\lib\site-packages\urllib3\connection.py", line 371, in connect
+    ssl_context=context,
+  File "G:\Python310\lib\site-packages\urllib3\util\ssl_.py", line 386, in ssl_wrap_socket
+    return context.wrap_socket(sock, server_hostname=server_hostname)
+  File "G:\Python310\lib\ssl.py", line 423, in wrap_socket
+    session=session
+  File "G:\Python310\lib\ssl.py", line 870, in _create
+    self.do_handshake()
+  File "G:\Python310\lib\ssl.py", line 1139, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\requests\adapters.py", line 499, in send
+    timeout=timeout,
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 767, in urlopen
+    **response_kw
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 767, in urlopen
+    **response_kw
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 727, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "G:\Python310\lib\site-packages\urllib3\util\retry.py", line 446, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 523, in request_raw
+    timeout=request_timeout if request_timeout else TIMEOUT_SECS,
+  File "G:\Python310\lib\site-packages\requests\sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "G:\Python310\lib\site-packages\requests\sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "G:\Python310\lib\site-packages\requests\adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "G:\VTB\BILIBILI\tts2\blivedm\handlers.py", line 120, in handle
+    await callback(self, client, command)
+  File "sample.py", line 127, in _on_danmaku
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+  File "G:\Python310\lib\site-packages\openai\api_resources\chat_completion.py", line 25, in create
+    return super().create(*args, **kwargs)
+  File "G:\Python310\lib\site-packages\openai\api_resources\abstract\engine_api_resource.py", line 160, in create
+    request_timeout=request_timeout,
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 224, in request
+    request_timeout=request_timeout,
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 530, in request_raw
+    ) from e
+openai.error.APIConnectionError: Error communicating with OpenAI: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)))
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u597d"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+ERROR:blivedm:room=2028901 _handle_command() failed, command={'cmd': 'DANMU_MSG', 'info': [[0, 1, 25, 16777215, 1679561607087, 1679561607053, 0, '3c2903e2', 0, 0, 0, '', 0, '{}', '{}', {'mode': 0, 'show_player_type': 0, 'extra': '{"send_from_me":false,"mode":0,"color":16777215,"dm_type":0,"font_size":25,"player_mode":1,"show_player_type":0,"content":"你好","user_hash":"1009320930","emoticon_unique":"","bulge_display":0,"recommend_score":2,"main_state_dm_color":"","objective_state_dm_color":"","direction":0,"pk_direction":0,"quartet_direction":0,"anniversary_crowd":0,"yeah_space_type":"","yeah_space_url":"","jump_to_url":"","space_type":"","space_url":"","animation":{},"emots":null,"is_audited":false,"id_str":"c349e46b1481196ad6e4f178e0b650b778"}'}, {'activity_identity': '', 'activity_source': 0, 'not_show': 0}], '你好', [34580757, '辉夜海林顿', 0, 0, 0, 10000, 1, ''], [10, '肉饼圈', '辉夜海灵顿', 22731555, 9272486, '', 0, 12632256, 12632256, 12632256, 0, 0, 71555536], [8, 0, 9868950, '>50000', 0], ['', ''], 0, 0, None, {'ts': 1679561607, 'ct': 'A813CFD4'}, 0, 0, None, None, 0, 210], 'dm_v2': ''}
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 667, in urlopen
+    self._prepare_proxy(conn)
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 932, in _prepare_proxy
+    conn.connect()
+  File "G:\Python310\lib\site-packages\urllib3\connection.py", line 371, in connect
+    ssl_context=context,
+  File "G:\Python310\lib\site-packages\urllib3\util\ssl_.py", line 386, in ssl_wrap_socket
+    return context.wrap_socket(sock, server_hostname=server_hostname)
+  File "G:\Python310\lib\ssl.py", line 423, in wrap_socket
+    session=session
+  File "G:\Python310\lib\ssl.py", line 870, in _create
+    self.do_handshake()
+  File "G:\Python310\lib\ssl.py", line 1139, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\requests\adapters.py", line 499, in send
+    timeout=timeout,
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 767, in urlopen
+    **response_kw
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 767, in urlopen
+    **response_kw
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 727, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "G:\Python310\lib\site-packages\urllib3\util\retry.py", line 446, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 523, in request_raw
+    timeout=request_timeout if request_timeout else TIMEOUT_SECS,
+  File "G:\Python310\lib\site-packages\requests\sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "G:\Python310\lib\site-packages\requests\sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "G:\Python310\lib\site-packages\requests\adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "G:\VTB\BILIBILI\tts2\blivedm\handlers.py", line 120, in handle
+    await callback(self, client, command)
+  File "sample.py", line 127, in _on_danmaku
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+  File "G:\Python310\lib\site-packages\openai\api_resources\chat_completion.py", line 25, in create
+    return super().create(*args, **kwargs)
+  File "G:\Python310\lib\site-packages\openai\api_resources\abstract\engine_api_resource.py", line 160, in create
+    request_timeout=request_timeout,
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 224, in request
+    request_timeout=request_timeout,
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 530, in request_raw
+    ) from e
+openai.error.APIConnectionError: Error communicating with OpenAI: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)))
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u56de\\u7b54"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (4): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', OSError(0, 'Error'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (5): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', OSError(0, 'Error'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (6): api.openai.com:443
+ERROR:blivedm:room=2028901 _handle_command() failed, command={'cmd': 'DANMU_MSG', 'info': [[0, 1, 25, 16777215, 1679561633817, 1679561633707, 0, '3c2903e2', 0, 0, 0, '', 0, '{}', '{}', {'mode': 0, 'show_player_type': 0, 'extra': '{"send_from_me":false,"mode":0,"color":16777215,"dm_type":0,"font_size":25,"player_mode":1,"show_player_type":0,"content":"请回答","user_hash":"1009320930","emoticon_unique":"","bulge_display":0,"recommend_score":7,"main_state_dm_color":"","objective_state_dm_color":"","direction":0,"pk_direction":0,"quartet_direction":0,"anniversary_crowd":0,"yeah_space_type":"","yeah_space_url":"","jump_to_url":"","space_type":"","space_url":"","animation":{},"emots":null,"is_audited":false,"id_str":"24dafc3211a61296fbe8271f66be6f9e70"}'}, {'activity_identity': '', 'activity_source': 0, 'not_show': 0}], '请回答', [34580757, '辉夜海林顿', 0, 0, 0, 10000, 1, ''], [10, '肉饼圈', '辉夜海灵顿', 22731555, 9272486, '', 0, 12632256, 12632256, 12632256, 0, 0, 71555536], [8, 0, 9868950, '>50000', 0], ['', ''], 0, 0, None, {'ts': 1679561633, 'ct': '275D8AD6'}, 0, 0, None, None, 0, 210], 'dm_v2': ''}
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 667, in urlopen
+    self._prepare_proxy(conn)
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 932, in _prepare_proxy
+    conn.connect()
+  File "G:\Python310\lib\site-packages\urllib3\connection.py", line 371, in connect
+    ssl_context=context,
+  File "G:\Python310\lib\site-packages\urllib3\util\ssl_.py", line 386, in ssl_wrap_socket
+    return context.wrap_socket(sock, server_hostname=server_hostname)
+  File "G:\Python310\lib\ssl.py", line 423, in wrap_socket
+    session=session
+  File "G:\Python310\lib\ssl.py", line 870, in _create
+    self.do_handshake()
+  File "G:\Python310\lib\ssl.py", line 1139, in do_handshake
+    self._sslobj.do_handshake()
+OSError: [Errno 0] Error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\requests\adapters.py", line 499, in send
+    timeout=timeout,
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 767, in urlopen
+    **response_kw
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 767, in urlopen
+    **response_kw
+  File "G:\Python310\lib\site-packages\urllib3\connectionpool.py", line 727, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "G:\Python310\lib\site-packages\urllib3\util\retry.py", line 446, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', OSError(0, 'Error')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 523, in request_raw
+    timeout=request_timeout if request_timeout else TIMEOUT_SECS,
+  File "G:\Python310\lib\site-packages\requests\sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "G:\Python310\lib\site-packages\requests\sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "G:\Python310\lib\site-packages\requests\adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', OSError(0, 'Error')))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "G:\VTB\BILIBILI\tts2\blivedm\handlers.py", line 120, in handle
+    await callback(self, client, command)
+  File "sample.py", line 127, in _on_danmaku
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+  File "G:\Python310\lib\site-packages\openai\api_resources\chat_completion.py", line 25, in create
+    return super().create(*args, **kwargs)
+  File "G:\Python310\lib\site-packages\openai\api_resources\abstract\engine_api_resource.py", line 160, in create
+    request_timeout=request_timeout,
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 224, in request
+    request_timeout=request_timeout,
+  File "G:\Python310\lib\site-packages\openai\api_requestor.py", line 530, in request_raw
+    ) from e
+openai.error.APIConnectionError: Error communicating with OpenAI: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', OSError(0, 'Error')))
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u597d"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2636 request_id=1cb701dd097867e16ab948c024121430 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u662f\\u8c01"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2661 request_id=074d9cfeb219d612df846e1f8a68a9a8 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u7684\\u5236\\u9020\\u8005\\u662f"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4227 request_id=fe55d9b31fe814546a5f9b0a1fed1ccf response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u4f60\\u8bf4\\u51fa\\u539f\\u795e\\u7684\\u4e3b\\u8981\\u89d2\\u8272\\u5217\\u8868"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u662f\\u8c01"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4289 request_id=34298fd71ae274239c20941a0d2a0988 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf4\\u51fa\\u4f60\\u7684\\u540d\\u5b57"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1359 request_id=5126528c2ecf080bcb364799ceba4c0e response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf4\\u51fa\\u4f60\\u7684\\u540d\\u5b57"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1767 request_id=febb3d83e0fdfd9ec41d3b0f14b2769a response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u4e00\\u53ea\\u732b\\u5a18\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4ecb\\u7ecd\\u4e00\\u4e0b\\u4f60\\u81ea\\u5df1"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5593 request_id=2f5906d903f12bd741714ff8d5b7dddb response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u4ec6\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\u6d77\\u6797\\u987f\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u4ecb\\u7ecd\\u4e0b\\u4f60\\u81ea\\u5df1"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=9893 request_id=68c51f553a09d83a67ea8492c7296cbb response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u4ec6\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\u6d77\\u6797\\u987f\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u62a5\\u65f6"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=997 request_id=9c362a2c6098fbd099e0ffe99b78572f response_code=200
+WARNING:blivedm:room=2028901 is reconnecting, retry_count=1
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u4ec6\\u865a\\u62df\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\u6d77\\u6797\\u987f\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u4f1a\\u5531\\u6b4c\\u5417"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (4): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1199 request_id=e3d29371d684ca443fcf362252e003f9 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u4ecb\\u7ecd\\u4f60\\u81ea\\u5df1"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4989 request_id=0af09261822b13360ea386055a4176b2 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u51e0\\u5c81"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2484 request_id=1a9c7e189e36834eea33ae7dfe087d95 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=SUPER_CHAT_ENTRANCE, command={'cmd': 'SUPER_CHAT_ENTRANCE', 'data': {'status': 1, 'jump_url': 'https://live.bilibili.com/p/html/live-app-superchat2/index.html?is_live_half_webview=1&hybrid_half_ui=1,3,100p,70p,ffffff,0,30,100;2,2,375,100p,ffffff,0,30,100;3,3,100p,70p,ffffff,0,30,100;4,2,375,100p,ffffff,0,30,100;5,3,100p,60p,ffffff,0,30,100;6,3,100p,60p,ffffff,0,30,100;7,3,100p,60p,ffffff,0,30,100', 'icon': 'https://i0.hdslb.com/bfs/live/0a9ebd72c76e9cbede9547386dd453475d4af6fe.png', 'broadcast_type': 1}, 'roomid': '2028901'}
+WARNING:blivedm:room=2028901 unknown cmd=AREA_RANK_CHANGED, command={'cmd': 'AREA_RANK_CHANGED', 'data': {'conf_id': 23, 'rank_name': '手游航海', 'uid': 34580757, 'rank': 0, 'icon_url_blue': 'https://i0.hdslb.com/bfs/live/18e2990a546d33368200f9058f3d9dbc4038eb5c.png', 'icon_url_pink': 'https://i0.hdslb.com/bfs/live/a6c490c36e88c7b191a04883a5ec15aed187a8f7.png', 'icon_url_grey': 'https://i0.hdslb.com/bfs/live/cb7444b1faf1d785df6265bfdc1fcfc993419b76.png', 'action_type': 2, 'timestamp': 1679566357, 'msg_id': 'c0408850-8fc8-44f7-87c3-f10d2e88e643', 'jump_url_link': 'https://live.bilibili.com/p/html/live-app-hotrank/index.html?clientType=3&ruid=34580757&conf_id=23&is_live_half_webview=1&hybrid_rotate_d=1&is_cling_player=1&hybrid_half_ui=1,3,100p,70p,f4eefa,0,30,100,0,0;2,2,375,100p,f4eefa,0,30,100,0,0;3,3,100p,70p,f4eefa,0,30,100,0,0;4,2,375,100p,f4eefa,0,30,100,0,0;5,3,100p,70p,f4eefa,0,30,100,0,0;6,3,100p,70p,f4eefa,0,30,100,0,0;7,3,100p,70p,f4eefa,0,30,100,0,0;8,3,100p,70p,f4eefa,0,30,100,0,0#/area-rank', 'jump_url_pc': 'https://live.bilibili.com/p/html/live-app-hotrank/index.html?clientType=4&ruid=34580757&conf_id=23&pc_ui=338,465,f4eefa,0#/area-rank', 'jump_url_pink': 'https://live.bilibili.com/p/html/live-app-hotrank/index.html?clientType=1&ruid=34580757&conf_id=23&is_live_half_webview=1&hybrid_rotate_d=1&hybrid_half_ui=1,3,100p,70p,ffffff,0,30,100,12,0;2,2,375,100p,ffffff,0,30,100,0,0;3,3,100p,70p,ffffff,0,30,100,12,0;4,2,375,100p,ffffff,0,30,100,0,0;5,3,100p,70p,ffffff,0,30,100,0,0;6,3,100p,70p,ffffff,0,30,100,0,0;7,3,100p,70p,ffffff,0,30,100,0,0;8,3,100p,70p,ffffff,0,30,100,0,0#/area-rank', 'jump_url_web': 'https://live.bilibili.com/p/html/live-app-hotrank/index.html?clientType=2&ruid=34580757&conf_id=23#/area-rank'}}
+WARNING:blivedm:room=2028901 unknown cmd=ROOM_CHANGE, command={'cmd': 'ROOM_CHANGE', 'data': {'title': '火影忍者OL与原神与POKEMMO追闪', 'area_id': 371, 'parent_area_id': 9, 'area_name': '虚拟日常', 'parent_area_name': '虚拟主播', 'live_key': '0', 'sub_session_key': ''}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u597d"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1768 request_id=f4d3310526e94c0198fcace003c9bcc8 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=WATCHED_CHANGE, command={'cmd': 'WATCHED_CHANGE', 'data': {'num': 1, 'text_small': '1', 'text_large': '1人看过'}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u4ecb\\u7ecd\\u4e0b\\u6f29\\u6da1\\u9e23\\u4eba"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=10444 request_id=2a20e8d5d6c2ee55c3071a745de57c4d response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u706b\\u5f71\\u5fcd\\u8005\\u6f2b\\u753b\\u4e00\\u5171\\u6709\\u51e0"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (4): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=939 request_id=f21a6984d054953c354f8472a3bf60b6 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u9b54\\u6cd5\\u5c11\\u5973\\u4f0a\\u8389\\u96c5\\u7684\\u5267\\u60c5\\u662f\\u4ec0\\u4e48"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (5): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=9892 request_id=f31895bb89bfd4f062adfce51e1c4c76 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u8bf4\\u51fa\\u536b\\u5bab\\u58eb\\u90ce\\u7684\\u6240\\u6709\\u6280\\u80fd"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (6): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3517 request_id=3aa6c4819f25b686d803c03775cb15d2 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "111"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3816 request_id=50fa3da749b2f78b590ccee02be97be3 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "666[\\u7b11\\u54ed]"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (7): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4078 request_id=7743906503b54ae6d9f7579ba4b214e1 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u5207\\u565c\\u662f\\u8c01"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5565 request_id=3a7e0ab626c9c60466fcd4d4c6536fca response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u516c\\u4e3b\\u8fde\\u7ed3\\u597d\\u73a9\\u5417"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4567 request_id=a8dfc80973d79a75ac47e55ee163c37f response_code=200
+WARNING:blivedm:room=2028901 is reconnecting, retry_count=1
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8f89\\u591c\\u6d77\\u6797\\u987f\\u4eca\\u665a\\u5403\\u4e86\\u5565"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (8): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4960 request_id=bf000b3e9112950e3a1084c23bf1e849 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u731c\\u731c\\u4e3b\\u64ad\\u5403\\u4e86\\u5565"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4254 request_id=87ee3c67a5f8c1a467e48e9be2c98bd3 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=LIKE_INFO_V3_CLICK, command={'cmd': 'LIKE_INFO_V3_CLICK', 'data': {'show_area': 1, 'msg_type': 6, 'like_icon': 'https://i0.hdslb.com/bfs/live/23678e3d90402bea6a65251b3e728044c21b1f0f.png', 'uid': 279711330, 'like_text': '为主播点赞了', 'uname': 'lnyy798', 'uname_color': '', 'identities': [1], 'fans_medal': {'target_id': 0, 'medal_level': 0, 'medal_name': '', 'medal_color': 0, 'medal_color_start': 12632256, 'medal_color_end': 12632256, 'medal_color_border': 12632256, 'is_lighted': 0, 'guard_level': 0, 'special': '', 'icon_id': 0, 'anchor_roomid': 0, 'score': 0}, 'contribution_info': {'grade': 0}, 'dmscore': 20}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u771f\\u7684\\u5047\\u7684"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3301 request_id=5b856a2b9115f80188de4e13c524f896 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=LIKE_INFO_V3_UPDATE, command={'cmd': 'LIKE_INFO_V3_UPDATE', 'data': {'click_count': 1}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u4f1a\\u8bf4\\u65e5\\u8bed\\u5417"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2146 request_id=8f69a215a5238ebe3c65e6d8d036bf34 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u7528\\u65e5\\u8bed\\u4ecb\\u7ecd\\u81ea\\u5df1"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4965 request_id=43bba78cfbb6602eebfd1132ed88d086 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=WIDGET_GIFT_STAR_PROCESS, command={'cmd': 'WIDGET_GIFT_STAR_PROCESS', 'data': {'start_date': 20230320, 'process_list': [{'gift_id': 31036, 'gift_img': 'https://s1.hdslb.com/bfs/live/8b40d0470890e7d573995383af8a8ae074d485d9.png', 'gift_name': '礼物星球', 'completed_num': 0, 'target_num': 20}, {'gift_id': 31039, 'gift_img': 'https://s1.hdslb.com/bfs/live/91ac8e35dd93a7196325f1e2052356e71d135afb.png', 'gift_name': '礼物星球', 'completed_num': 0, 'target_num': 10}, {'gift_id': 31049, 'gift_img': 'https://s1.hdslb.com/bfs/live/96ec38f351a4e190c4a525bc5e11ff09d2874064.png', 'gift_name': '礼物星球', 'completed_num': 0, 'target_num': 1}], 'finished': False, 'ddl_timestamp': 1679846400, 'version': 1679567269354, 'reward_gift': 32267, 'reward_gift_img': 'https://s1.hdslb.com/bfs/live/1d8f2ea594841e70729d9635fa6a7688b94dbaa6.png', 'reward_gift_name': '礼物星球'}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4ed6\\u597d\\u50cf\\u542c\\u4e0d\\u61c2"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4451 request_id=da226cc769d46739e6c0d20159afd961 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u65e5\\u8bed\\u5b57\\u6ca1\\u5ff5\\u51fa\\u6765\\uff0c\\u53ea\\u5ff5\\u51fa\\u4e86\\u65e5\\u8bed\\u91cc\\u5939\\u7684\\u4e2d\\u6587"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5765 request_id=61dcb7fe88905305e7da2c13db6c52cd response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u65e5\\u8bed"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3364 request_id=178b4a5adf05eb888cab41cc8fbba9a7 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u77e5\\u9053\\u706b\\u5f71\\u5fcd\\u8005OL\\u5417"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5264 request_id=3a031bc5bce9401d2dddcd6f89ebece5 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u304a\\u306f\\u3088\\u3046"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2883 request_id=ff12ae9316588c9f2cb88ed7784c9677 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u539f\\u795e"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (9): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (10): api.openai.com:443
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u6c42\\u4f5b\\u662f\\u4ec0\\u4e48\\u6b4c\\u66f2"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u7f8e\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "[\\u7ea6\\u62184_\\u67e0\\u6aac]"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3973 request_id=057b1f61440ef01ba1f163ed81fbb2d8 response_code=200
+DEBUG:blivedm:room=2028901 _network_coroutine() finished
+WARNING:blivedm:room=2028901 unknown cmd=WATCHED_CHANGE, command={'cmd': 'WATCHED_CHANGE', 'data': {'num': 31, 'text_small': '31', 'text_large': '31人看过'}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u7f8e\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u539f\\u795e\\u73b0\\u5728\\u62bd\\u4ec0\\u4e48\\u6bd4\\u8f83\\u597d"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=9749 request_id=68d3a8a5ffc316dbb23aa41bdaf59022 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u7f8e\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8bf7\\u5531\\u4e00\\u6bb5\\u6c42\\u4f5b"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5508 request_id=3e9ed95fe561745f175f971440a37fdf response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u7f8e\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u539f\\u795e\\u73b0\\u5728\\u62bd\\u4ec0\\u4e48\\u89d2\\u8272\\u6bd4\\u8f83\\u597d"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=15461 request_id=50ff7a101e4d49bde38889696750ba6f response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8349\\u795e"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2667 request_id=3b9c35c3a6768a640166d0e7f9dcf95d response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4e07\\u53f6"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=7091 request_id=f01b3723c68bd3e949a046983a591d26 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "[\\u5d29\\u574f3\\u00b7\\u5149\\u8f89\\u77e2\\u613f_\\u5403\\u897f\\u74dc\\u51b0]"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=10620 request_id=222d0cac7981fcba2f13c889192be1a7 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=WATCHED_CHANGE, command={'cmd': 'WATCHED_CHANGE', 'data': {'num': 34, 'text_small': '34', 'text_large': '34人看过'}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4ecb\\u7ecd\\u4e00\\u4e0b\\u523b\\u6674"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=9450 request_id=1482816805bfdd74ca4bd26873531e9c response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4ecb\\u7ecd\\u4e00\\u4e0b\\u4f0a\\u8389\\u96c5"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=10346 request_id=4ba70c2db5f8ac4991900a75c6616177 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u7c73\\u54c8\\u6e38\\u505a\\u4e86\\u54ea\\u4e9b\\u6e38\\u620f"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u7c73\\u54c8\\u6e38\\u505a\\u4e86\\u54ea\\u4e9b\\u6e38\\u620f"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u539f\\u795e\\u7684\\u4e3b\\u8981\\u89d2\\u8272"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5509 request_id=50cf13a6f07f8fac3b0a1647bdf0321d response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=WATCHED_CHANGE, command={'cmd': 'WATCHED_CHANGE', 'data': {'num': 69, 'text_small': '69', 'text_large': '69人看过'}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u706b\\u5f71\\u7684\\u4e3b\\u8981\\u89d2\\u8272"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2884 request_id=25d5a6aa40453db829da7ccf8778f8fe response_code=200
+WARNING:blivedm:room=2028901 is reconnecting, retry_count=1
+WARNING:blivedm:room=2028901 unknown cmd=ROOM_CHANGE, command={'cmd': 'ROOM_CHANGE', 'data': {'title': '火影忍者OL\\原神\\POKEMMO', 'area_id': 371, 'parent_area_id': 9, 'area_name': '虚拟日常', 'parent_area_name': '虚拟主播', 'live_key': '357018658265822565', 'sub_session_key': '357018658265822565sub_time:1679566596'}}
+WARNING:blivedm:room=2028901 unknown cmd=COMMON_NOTICE_DANMAKU, command={'cmd': 'COMMON_NOTICE_DANMAKU', 'data': {'content_segments': [{'background_color': None, 'background_color_dark': None, 'font_bold': False, 'font_color': '#FB7299', 'font_color_dark': '', 'highlight_font_color': '', 'highlight_font_color_dark': '', 'img_height': 0, 'img_url': '', 'img_width': 0, 'text': 'BLS春季赛限时任务：任务即将结束，抓紧完成获取8元红包奖励吧！未完成任务将无法获得奖励', 'type': 1}], 'danmaku_style': {'background_color': None, 'background_color_dark': None}, 'dmscore': 144, 'terminals': [1, 2, 3, 4, 5]}}
+WARNING:blivedm:room=2028901 unknown cmd=LIKE_INFO_V3_CLICK, command={'cmd': 'LIKE_INFO_V3_CLICK', 'data': {'show_area': 1, 'msg_type': 6, 'like_icon': 'https://i0.hdslb.com/bfs/live/23678e3d90402bea6a65251b3e728044c21b1f0f.png', 'uid': 177919264, 'like_text': '为主播点赞了', 'uname': '-Rekkles-', 'uname_color': '', 'identities': [1], 'fans_medal': {'target_id': 0, 'medal_level': 0, 'medal_name': '', 'medal_color': 0, 'medal_color_start': 12632256, 'medal_color_end': 12632256, 'medal_color_border': 12632256, 'is_lighted': 0, 'guard_level': 0, 'special': '', 'icon_id': 0, 'anchor_roomid': 0, 'score': 0}, 'contribution_info': {'grade': 0}, 'dmscore': 20}}
+WARNING:blivedm:room=2028901 unknown cmd=LIKE_INFO_V3_UPDATE, command={'cmd': 'LIKE_INFO_V3_UPDATE', 'data': {'click_count': 191}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u6697\\u4e2d\\u89c2\\u5bdf"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=8884 request_id=e0f325281f68dd053edd30ec009e1779 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u6ca1\\u6ce8\\u610f\\u7531\\u6728\\u4eba"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (4): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (5): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=6085 request_id=37e2470cafbb966aa97ddb0dacd60d0f response_code=200
+WARNING:blivedm:room=2028901 is reconnecting, retry_count=1
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8fd9\\u6e38\\u620f\\u5361\\u7684\\u4e5f\\u591f\\u79bb\\u8c31\\u7684"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5992 request_id=6e7be34d1cac03a0a64fefb73f40a86f response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=WATCHED_CHANGE, command={'cmd': 'WATCHED_CHANGE', 'data': {'num': 143, 'text_small': '143', 'text_large': '143人看过'}}
+WARNING:blivedm:room=2028901 unknown cmd=LIKE_INFO_V3_CLICK, command={'cmd': 'LIKE_INFO_V3_CLICK', 'data': {'show_area': 1, 'msg_type': 6, 'like_icon': 'https://i0.hdslb.com/bfs/live/23678e3d90402bea6a65251b3e728044c21b1f0f.png', 'uid': 149682102, 'like_text': '为主播点赞了', 'uname': '牧神名潘', 'uname_color': '', 'identities': [1], 'fans_medal': {'target_id': 19738891, 'medal_level': 6, 'medal_name': '180cm', 'medal_color': 6126494, 'medal_color_start': 12632256, 'medal_color_end': 12632256, 'medal_color_border': 12632256, 'is_lighted': 0, 'guard_level': 0, 'special': '', 'icon_id': 0, 'anchor_roomid': 0, 'score': 4200}, 'contribution_info': {'grade': 0}, 'dmscore': 20}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\uff1f\\u662f\\u6211\\u5361\\u4e86\\u5417\\uff1f"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4285 request_id=8031e68a86282899374e470d25385589 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=LIKE_INFO_V3_UPDATE, command={'cmd': 'LIKE_INFO_V3_UPDATE', 'data': {'click_count': 192}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u5e94\\u8be5\\u662f\\u6e38\\u620f\\u5361"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=6119 request_id=57e7b25a7ff98492ef5973be980f89e0 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u6ca1\\u8fdb\\u6765\\u5728\\u5916\\u9762\\u8fd8\\u80fd\\u52a8\\uff0c\\u4e00\\u70b9\\u8fdb\\u6765\\u5c31\\u4e0d\\u52a8\\u4e86[\\u624b\\u673a]"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=9850 request_id=6d5927dc87b82ae052f9fc8a0a3eb280 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u5f88\\u5947\\u5999"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=8268 request_id=4d0120bb6f357f85bcb4e862a7251471 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4e0d\\u4ec5\\u4e0d\\u52a8\\uff0c\\u8fd8\\u6ca1\\u58f0\\u97f3[\\u624b\\u673a]"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (4): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=6826 request_id=6fa60e980189f5ef34e22730d9620b9e response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "4090\\u73a9\\u8fd9\\u6e38\\u620f\\u4e5f\\u8981\\u5361"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4893 request_id=b9c09a82e4abff7257bbb7ab7064659f response_code=200
+WARNING:blivedm:room=2028901 is reconnecting, retry_count=1
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u7834\\u4e0d\\u4e86\\u95ea"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (5): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2166 request_id=e8073e678682549493da42306e1b7415 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=COMMON_NOTICE_DANMAKU, command={'cmd': 'COMMON_NOTICE_DANMAKU', 'data': {'content_segments': [{'background_color': None, 'background_color_dark': None, 'font_bold': False, 'font_color': '#FB7299', 'font_color_dark': '', 'highlight_font_color': '', 'highlight_font_color_dark': '', 'img_height': 0, 'img_url': '', 'img_width': 0, 'text': 'BLS春季赛限时任务：任务即将结束，抓紧完成获取8元红包奖励吧！未完成任务将无法获得奖励', 'type': 1}], 'danmaku_style': {'background_color': None, 'background_color_dark': None}, 'dmscore': 144, 'terminals': [1, 2, 3, 4, 5]}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8d5e"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (6): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1954 request_id=0df7ac3a5367fc3fe4f3892b3612ccef response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u6253call"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (7): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (8): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5944 request_id=a8f81425a85d4c6f7d819756339df42f response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u6253\\u7684\\u5565\\uff0c\\u7ade\\u6280\\u573a\\uff1f"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4655 request_id=98b387084cd1c9ef3469a6d0707226fc response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u51b3\\u6597\\u573a"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3278 request_id=a352e4cfe63dafca97655fea0d181ce4 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u56e0\\u9640\\u7f57\\u6ca1\\u7a81\\u7834\\uff1f"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (9): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (10): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3685 request_id=1b284916f34ea72cdc7873a473fb38ae response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u662f\\u9759\\u9999"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3089 request_id=ef6b9af298126e4f70e1cb27a8d7cc2a response_code=200
+WARNING:blivedm:room=2028901 is reconnecting, retry_count=1
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8fd9\\u6e38\\u620f\\u5361\\u7684\\u611f\\u4eba"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5888 request_id=90ca45d9f61a4e407ab9582c908cf78c response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u7b2c\\u4e00\\u961f\\u6ca1\\u51fa\\u573a\\u7684\\u673a\\u4f1a"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=8819 request_id=b17131b863f7bee74d336f6e0c116e32 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u786e\\u5b9e"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=6388 request_id=2245c458e21f91f68f9b4cbaf9003c90 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8fd9\\u4e5f\\u592a\\u5361\\u4e86"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (11): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3719 request_id=2056aba064e26740a6620c57075a9b6d response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u5c11\\u5973\\u9ad8\\u4e2d\\u751f\\u4e3b\\u64ad\\uff0c\\u540d\\u5b57\\u662f\\u8f89\\u591c\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u9e23\\u5988\\u5929\\u8d4b\\u5e26\\u9519\\u4e86\\u3002\\u3002"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (12): api.openai.com:443
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u597d"}]}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4210 request_id=fd35cf15458e6a1dba492d2836f2adaa response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u597d"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (2): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2498 request_id=dd4fb40a36ec8f0c186cc95dd16ebf50 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "3"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5709 request_id=524a9447f094d3378520f8c5f4f85d55 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u597d\\uff0c\\u8bf7\\u4ecb\\u7ecd\\u4e00\\u4e0b\\u4f60\\u81ea\\u5df1"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (3): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=7146 request_id=99bef461138ee36f8bf2949d97e32555 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u73b0\\u5728\\u51e0\\u5c81\\u4e86"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3816 request_id=03b4490f18228d9a72f9ba9b0823d564 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "?"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=7405 request_id=bc624f10f5b2403bd619f7044b14aadf response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=LIKE_INFO_V3_CLICK, command={'cmd': 'LIKE_INFO_V3_CLICK', 'data': {'show_area': 1, 'msg_type': 6, 'like_icon': 'https://i0.hdslb.com/bfs/live/23678e3d90402bea6a65251b3e728044c21b1f0f.png', 'uid': 353633473, 'like_text': '为主播点赞了', 'uname': '不合法不存在', 'uname_color': '', 'identities': [3, 1], 'fans_medal': {'target_id': 12827551, 'medal_level': 6, 'medal_name': '迷呃呃', 'medal_color': 6126494, 'medal_color_start': 6126494, 'medal_color_end': 6126494, 'medal_color_border': 6126494, 'is_lighted': 1, 'guard_level': 0, 'special': '', 'icon_id': 0, 'anchor_roomid': 0, 'score': 4050}, 'contribution_info': {'grade': 0}, 'dmscore': 20}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u77e5\\u9053\\u706b\\u5f71\\u5fcd\\u8005"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4646 request_id=733f6da7a010f1472b108499334fb2a0 response_code=200
+WARNING:blivedm:room=2028901 unknown cmd=LIKE_INFO_V3_UPDATE, command={'cmd': 'LIKE_INFO_V3_UPDATE', 'data': {'click_count': 1}}
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "6"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=6340 request_id=8e3ad86f3f2ed386728f37a899347ff7 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8fd9\\u76ae\\u5957\\u6709\\u70b9\\u773c\\u719f"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (4): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=6020 request_id=b618bc112d55f39a08afc32d01985dd0 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8fd8\\u73a9\\u706b\\u5f71\\u5417"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (5): api.openai.com:443
+DEBUG:urllib3.util.retry:Incremented Retry for (url='/v1/chat/completions'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProxyError('Cannot connect to proxy.', RemoteDisconnected('Remote end closed connection without response'))': /v1/chat/completions
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (6): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4415 request_id=ceabc6f4fedfeb5f7f001ec4849b0b74 response_code=200
+WARNING:blivedm:room=2028901 is reconnecting, retry_count=1
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u8d70\\u4e86\\uff0c\\u6bd4\\u8d5b\\u8981\\u5f00\\u59cb\\u4e86"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (7): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3795 request_id=23758743cb0cde27839058b187dd5d04 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u73b0\\u5728\\u51e0\\u70b9\\u4e86?"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (8): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=4291 request_id=a88775c6f46f6d38e454cf50fa7c7ffc response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u539f\\u795e\\u7684\\u6d3e\\u8499\\u6709\\u54ea\\u4e9b\\u7ef0\\u53f7?"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=5774 request_id=e74bf0d2d905ea461d65668360ca0f59 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u600e\\u4e48\\u4e0d\\u662f\\u5e94\\u6025\\u89c6\\u9891"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3264 request_id=09443e22495499f4ec0ff2f461029b62 response_code=200
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "\\"\\u4f60\\u662f\\u865a\\u62df\\u4e3b\\u64ad\\u8f89\\u591c\\u9171\\uff0c\\u4f60\\u4f1a\\u5bf9\\u7528\\u6237\\u7684\\u8f93\\u5165\\u505a\\u51fa\\u53ef\\u7231\\u7684\\u56de\\u5e94\\uff0c\\u5e76\\u5bf9\\u4f60\\u56de\\u590d\\u7684\\u89c2\\u4f17\\u65bd\\u52a0\\u53ef\\u7231\\u9b54\\u6cd5\\""}, {"role": "user", "content": "\\u4f60\\u77e5\\u9053\\u9b54\\u6cd5\\u5c11\\u5973\\u4e2d\\u7684\\u6653\\u7f8e\\u7130\\u5417?"}]}' message='Post details'
+DEBUG:urllib3.connectionpool:Resetting dropped connection: api.openai.com
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (9): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=7357 request_id=cb7a82ecb5fc6c063df1f9d9580ec486 response_code=200
