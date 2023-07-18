@@ -7,24 +7,29 @@ import pygame
 import openai
 import logging as log
 import configparser
-import pygame
+import time
+
 from gtts import gTTS
 import subprocess
 from collections import deque
 
 config = configparser.ConfigParser()
-config.read('config.txt', encoding='utf-8')
+#config.read('config.txt')
+config.read('config.txt', encoding='utf-8-sig')
+
 
 print(config.sections())
 room_id = config.getint('DEFAULT', 'room_id')
 openai_api_key = config.get('DEFAULT', 'openai.api_key')
-set = config.get('DEFAULT', 'set')
+set = config.get('DEFAULT', 'set')  # prompt
 #打印set的类型
 print(type(set))
 
-print("B站@澪式烧酒--制作")
+#print("B站@澪式烧酒--制作")
 print(room_id)
 print(set)
+MEMORYLEN = 3
+print('memory len:',MEMORYLEN)
 
 # 直播间ID的取值看直播间URL
 TEST_ROOM_IDS = [
@@ -86,6 +91,10 @@ class MyHandler(blivedm.BaseHandler):
     #     print(f"[{client.room_id}] INTERACT_WORD: self_type={type(self).__name__}, room_id={client.room_id},"
     #           f" uname={command['data']['uname']}")
     # _CMD_CALLBACK_DICT['INTERACT_WORD'] = __interact_word_callback  # noqa
+    def __init__(self):
+        super().__init__()
+        self.history = []
+        pygame.mixer.init()
 
     async def _on_heartbeat(self, client: blivedm.BLiveClient, message: blivedm.HeartbeatMessage):
         print(f'[{client.room_id}] 当前人气值：{message.popularity}')
@@ -108,33 +117,40 @@ class MyHandler(blivedm.BaseHandler):
 
     async def _on_danmaku(self, client: blivedm.BLiveClient, message: blivedm.DanmakuMessage):
         print(f'[{client.room_id}] {message.uname}：{message.msg}')
+        starttime = time.time()
         #messages = []
         openai.api_key = openai_api_key
         # 设置模型名称
         model_engine = "text-davinci-002"
         #msg = message.msg
         #item =  {"role": "user", "content": f'"做出尽量简短的回复："+{msg}'}
-        message_queue = deque()
         log.basicConfig(filename='openai-history.log', level=log.DEBUG)
-        messages =  [ {"role": "system", "content": set},
-                {"role": "user", "content": message.msg}]
-        message_queue.append(messages)
-        if len(message_queue) > 3:
-            message_queue.popleft()
-        #messages.append(item)
-        #出队列
+        self.history.append({"role": "user", "content": message.msg})
+        if len(self.history) > MEMORYLEN:
+            self.history.pop(0)
+            self.history.pop(0)
+        messages = [{"role": "system", "content": set}] + self.history
+        #messages =  [ {"role": "system", "content": set},
+        #        {"role": "user", "content": message.msg}]
         # ChatGPT is powered by gpt-3.5-turbo, OpenAI’s most advanced language model.
-        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
-        answer = str(response['choices'][0]['message']['content'])
-        print(answer)
+        print('generating text')
+        #response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+        #answer = str(response['choices'][0]['message']['content'])
+        answer = '卧槽'
+        # 如果answer有换行，则去掉否则会报错
+        answer = answer.replace('\n','')
+        self.history.append({"role":"assistant","content":answer})
+        print('answer is:',answer, 'time cost is:',time.time()-starttime)
         # 设置要合成的文本
         text = answer
+        ttsstart = time.time()
         #生成TTS语音
         command = f'edge-tts --voice zh-CN-XiaoyiNeural --text "{answer}" --write-media output.mp3'  # 将 AI 生成的文本传递给 edge-tts 命令
         subprocess.run(command, shell=True)  # 执行命令行指令
-
+        soundbegin = time.time()
+        print('TTS cost time:',soundbegin - ttsstart)
         # 初始化 Pygame
-        pygame.mixer.init()
+        #pygame.mixer.init()
 
         # 加载语音文件
         pygame.mixer.music.load("output.mp3")
@@ -147,7 +163,9 @@ class MyHandler(blivedm.BaseHandler):
             pygame.time.Clock().tick(10)
 
         # 退出临时语音文件
-        pygame.mixer.quit()
+        #pygame.mixer.quit()
+        print(f"playing sound cost {time.time()-soundbegin}s")
+        print(f'response time:{time.time()-starttime}')
 
 
 #回复礼物
