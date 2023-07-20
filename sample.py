@@ -12,6 +12,8 @@ import time
 from gtts import gTTS
 import subprocess
 from collections import deque
+import requests
+import pickle
 
 config = configparser.ConfigParser()
 #config.read('config.txt')
@@ -25,11 +27,13 @@ set = config.get('DEFAULT', 'set')  # prompt
 #打印set的类型
 print(type(set))
 
-#print("B站@澪式烧酒--制作")
 print(room_id)
 print(set)
-MEMORYLEN = 3
+MEMORYLEN = 4
 print('memory len:',MEMORYLEN)
+USE_MODEL = "chatglm-6b"  # chatglm 公司内网
+print(f"using model {USE_MODEL}")
+
 
 # 直播间ID的取值看直播间URL
 TEST_ROOM_IDS = [
@@ -114,7 +118,57 @@ class MyHandler(blivedm.BaseHandler):
         print(f'[{client.room_id}] 醒目留言 ¥{message.price} {message.uname}：{message.message}')
 
 #回复弹幕
+    def append_question(self, question):
+        if USE_MODEL == "OPENAI":
+            self.history.append({"role": "user", "content": question})
+        elif USE_MODEL == "chatglm-6b":
+            self.history.append({"question":question})
 
+    def append_answer(self, answer):
+        if USE_MODEL == "OPENAI":
+            self.history.append({"role":"assistant","content":answer})
+        elif USE_MODEL == "chatglm-6b" or USE_MODEL == 'chatglm2-6b':
+            self.history[len(self.history)-1]["answer"] = answer
+
+    def prepare_input(self, new_question):
+        if USE_MODEL == "OPENAI":
+            self.append_question(new_question)
+            messages = [{"role": "system", "content": set}] + self.history
+            return messages
+        elif USE_MODEL == "chatglm-6b":
+            prompt = set
+            for i, text in self.history:
+                prompt += "[Round {}]\n问：{}\n答：{}\n".format(i, text["question"], text["answer"])
+            prompt += "[Round {}]\n问：{}\n答：".format(len(self.history), new_question)
+            self.append_question(new_question)
+            return prompt
+
+    def clip_history(self):
+        if MODE_TYPE == 'OPENAI':
+            if len(self.history) / 2 > MEMORYLEN:
+                self.history.pop(0)
+                self.history.pop(0)
+        else:
+            if len(self.history) > MEMORYLEN:
+                self.history.pop(0)
+
+    def send_openai(self, prompt):
+        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+        answer = str(response['choices'][0]['message']['content'])
+        return answer
+
+    def send_chatglm(self, text):
+        url = 'http://alimama-llm.alibaba-inc.com/api'
+        model_name = "chatglm-6b"
+        headers = {   "Content-Type": "application/json; charset=UTF-8"}
+        gen_config = {}
+        data = {"model_name":model_name, "mode": 'generate',
+          "data":{"text":text, "gen_config":gen_config}}
+        r = requests.post(url, data=pickle.dumps(data), headers=headers)
+        return r.text
+        
+        
+            
     async def _on_danmaku(self, client: blivedm.BLiveClient, message: blivedm.DanmakuMessage):
         print(f'[{client.room_id}] {message.uname}：{message.msg}')
         starttime = time.time()
@@ -122,24 +176,28 @@ class MyHandler(blivedm.BaseHandler):
         openai.api_key = openai_api_key
         # 设置模型名称
         model_engine = "text-davinci-002"
-        #msg = message.msg
+        question = message.msg
         #item =  {"role": "user", "content": f'"做出尽量简短的回复："+{msg}'}
         log.basicConfig(filename='openai-history.log', level=log.DEBUG)
-        self.history.append({"role": "user", "content": message.msg})
-        if len(self.history) > MEMORYLEN:
-            self.history.pop(0)
-            self.history.pop(0)
-        messages = [{"role": "system", "content": set}] + self.history
+        #self.history.append({"role": "user", "content": message.msg})
+        prompt = self.prepare_input(question)
+        self.clip_history()
+        #messages = [{"role": "system", "content": set}] + self.history
         #messages =  [ {"role": "system", "content": set},
         #        {"role": "user", "content": message.msg}]
         # ChatGPT is powered by gpt-3.5-turbo, OpenAI’s most advanced language model.
         print('generating text')
         #response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
-        #answer = str(response['choices'][0]['message']['content'])
-        answer = '卧槽'
+        if MODEL_TYPE == "OPENAI":
+            answer = send_openai(prompt)
+        elif MODEL_TYPE == "chatglm-6b":
+            answer = send_chatglm(prompt)
+        #answer = '卧槽'
         # 如果answer有换行，则去掉否则会报错
         answer = answer.replace('\n','')
-        self.history.append({"role":"assistant","content":answer})
+        
+        #self.history.append({"role":"assistant","content":answer})
+        self.append_answer(answer)
         print('answer is:',answer, 'time cost is:',time.time()-starttime)
         # 设置要合成的文本
         text = answer
