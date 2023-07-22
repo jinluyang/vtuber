@@ -24,6 +24,7 @@ print(config.sections())
 room_id = config.getint('DEFAULT', 'room_id')
 openai_api_key = config.get('DEFAULT', 'openai.api_key')
 set = config.get('DEFAULT', 'set')  # prompt
+UID = config.get('DEFAULT', 'uid')  # 如果不设自己的uid，有时候会获取不到弹幕，而且必须传int
 #打印set的类型
 print(type(set))
 
@@ -31,7 +32,7 @@ print(room_id)
 print(set)
 MEMORYLEN = 4
 print('memory len:',MEMORYLEN)
-USE_MODEL = "chatglm-6b"  # chatglm 公司内网
+USE_MODEL = "OPENAI"#"chatglm-6b"  # chatglm 公司内网
 print(f"using model {USE_MODEL}")
 
 
@@ -41,7 +42,7 @@ TEST_ROOM_IDS = [
 ]
 
 async def main():
-    await run_single_client()
+    #await run_single_client()
     await run_multi_client()
     await asyncio.sleep(20)
 
@@ -70,7 +71,7 @@ async def run_multi_client():
     """
     演示同时监听多个直播间
     """
-    clients = [blivedm.BLiveClient(room_id) for room_id in TEST_ROOM_IDS]
+    clients = [blivedm.BLiveClient(room_id, ssl=True, heartbeat_interval=30, uid=int(UID)) for room_id in TEST_ROOM_IDS]
     handler = MyHandler()
     for client in clients:
         client.add_handler(handler)
@@ -98,24 +99,24 @@ class MyHandler(blivedm.BaseHandler):
     def __init__(self):
         super().__init__()
         self.history = []
-        pygame.mixer.init()
+        
 
     async def _on_heartbeat(self, client: blivedm.BLiveClient, message: blivedm.HeartbeatMessage):
         print(f'[{client.room_id}] 当前人气值：{message.popularity}')
 
-    async def _on_danmaku(self, client: blivedm.BLiveClient, message: blivedm.DanmakuMessage):
-        print(f'[{client.room_id}] {message.uname}：{message.msg}')
+    #async def _on_danmaku(self, client: blivedm.BLiveClient, message: blivedm.DanmakuMessage):
+    #    print(f'[{client.room_id}] {message.uname}：{message.msg}')
 
     
-    async def _on_gift(self, client: blivedm.BLiveClient, message: blivedm.GiftMessage):
-        print(f'[{client.room_id}] {message.uname} 赠送{message.gift_name}x{message.num}'
-              f' （{message.coin_type}瓜子x{message.total_coin}）')
+    #async def _on_gift(self, client: blivedm.BLiveClient, message: blivedm.GiftMessage):
+    #    print(f'[{client.room_id}] {message.uname} 赠送{message.gift_name}x{message.num}'
+    #          f' （{message.coin_type}瓜子x{message.total_coin}）')
     
     #async def _on_buy_guard(self, client: blivedm.BLiveClient, message: blivedm.GuardBuyMessage):
-        print(f'[{client.room_id}] {message.username} 购买{message.gift_name}')
+    #    print(f'[{client.room_id}] {message.username} 购买{message.gift_name}')
 
     #async def _on_super_chat(self, client: blivedm.BLiveClient, message: blivedm.SuperChatMessage):
-        print(f'[{client.room_id}] 醒目留言 ¥{message.price} {message.uname}：{message.message}')
+    #   print(f'[{client.room_id}] 醒目留言 ¥{message.price} {message.uname}：{message.message}')
 
 #回复弹幕
     def append_question(self, question):
@@ -137,14 +138,14 @@ class MyHandler(blivedm.BaseHandler):
             return messages
         elif USE_MODEL == "chatglm-6b":
             prompt = set
-            for i, text in self.history:
+            for i, text in enumerate(self.history):
                 prompt += "[Round {}]\n问：{}\n答：{}\n".format(i, text["question"], text["answer"])
             prompt += "[Round {}]\n问：{}\n答：".format(len(self.history), new_question)
             self.append_question(new_question)
             return prompt
 
     def clip_history(self):
-        if MODE_TYPE == 'OPENAI':
+        if USE_MODEL == 'OPENAI':
             if len(self.history) / 2 > MEMORYLEN:
                 self.history.pop(0)
                 self.history.pop(0)
@@ -152,7 +153,7 @@ class MyHandler(blivedm.BaseHandler):
             if len(self.history) > MEMORYLEN:
                 self.history.pop(0)
 
-    def send_openai(self, prompt):
+    def send_openai(self, messages):
         response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
         answer = str(response['choices'][0]['message']['content'])
         return answer
@@ -161,11 +162,22 @@ class MyHandler(blivedm.BaseHandler):
         url = 'http://alimama-llm.alibaba-inc.com/api'
         model_name = "chatglm-6b"
         headers = {   "Content-Type": "application/json; charset=UTF-8"}
-        gen_config = {}
+        gen_config = {'max_new_tokens':40}
         data = {"model_name":model_name, "mode": 'generate',
           "data":{"text":text, "gen_config":gen_config}}
-        r = requests.post(url, data=pickle.dumps(data), headers=headers)
-        return r.text
+        input_len = len(text)
+        try:
+            r = requests.post(url, data=pickle.dumps(data), headers=headers)
+            if r.status_code != 200:
+                print(r.text)
+                return "网络错误"
+            result = r.json()['result']
+            result = result[input_len:]
+        except:
+            result = "网络错误"
+            traceback.print_exc()
+        finally:
+            return result
         
         
             
@@ -188,13 +200,14 @@ class MyHandler(blivedm.BaseHandler):
         # ChatGPT is powered by gpt-3.5-turbo, OpenAI’s most advanced language model.
         print('generating text')
         #response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
-        if MODEL_TYPE == "OPENAI":
-            answer = send_openai(prompt)
-        elif MODEL_TYPE == "chatglm-6b":
-            answer = send_chatglm(prompt)
+        if USE_MODEL == "OPENAI":
+            answer = self.send_openai(prompt)
+        elif USE_MODEL == "chatglm-6b":
+            answer = self.send_chatglm(prompt)
         #answer = '卧槽'
         # 如果answer有换行，则去掉否则会报错
         answer = answer.replace('\n','')
+        answer = answer.replace("'",'')
         
         #self.history.append({"role":"assistant","content":answer})
         self.append_answer(answer)
@@ -208,7 +221,7 @@ class MyHandler(blivedm.BaseHandler):
         soundbegin = time.time()
         print('TTS cost time:',soundbegin - ttsstart)
         # 初始化 Pygame
-        #pygame.mixer.init()
+        pygame.mixer.init()
 
         # 加载语音文件
         pygame.mixer.music.load("output.mp3")
@@ -221,7 +234,7 @@ class MyHandler(blivedm.BaseHandler):
             pygame.time.Clock().tick(10)
 
         # 退出临时语音文件
-        #pygame.mixer.quit()
+        pygame.mixer.quit()
         print(f"playing sound cost {time.time()-soundbegin}s")
         print(f'response time:{time.time()-starttime}')
 
